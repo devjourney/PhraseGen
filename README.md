@@ -39,11 +39,3 @@ This tool provides memorable building blocks. To create a strong passphrase:
 1. Take the three generated words
 2. Add numbers, symbols, or additional words
 3. Example: `Wise Duck Leap` → `Wise7Duck!Leap#2024`
-
-## Deployment to GitHub Pages
-
-1. Create a new repository on GitHub
-2. Push this code to the repository
-3. Go to Settings → Pages
-4. Select the branch to deploy (usually `main`)
-5. Your site will be live at `https://yourusername.github.io/repositoryname/`
