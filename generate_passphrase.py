@@ -37,8 +37,8 @@ def main():
     noun = random.choice(nouns)
     verb = random.choice(verbs)
 
-    # Output with capitalized first letters
-    print(f"{adjective.capitalize()} {noun.capitalize()} {verb.capitalize()}")
+    # Output in lowercase
+    print(f"{adjective} {noun} {verb}")
 
 
 if __name__ == '__main__':

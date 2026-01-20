@@ -43,9 +43,9 @@ function generatePassphrase() {
         return;
     }
 
-    const adjective = capitalize(randomChoice(adjectives));
-    const noun = capitalize(randomChoice(nouns));
-    const verb = capitalize(randomChoice(verbs));
+    const adjective = randomChoice(adjectives);
+    const noun = randomChoice(nouns);
+    const verb = randomChoice(verbs);
 
     document.getElementById('result').textContent = `${adjective} ${noun} ${verb}`;
 
