@@ -27,12 +27,15 @@
             text-align: center;
             margin-bottom: 30px;
         }
+        .result-container {
+            position: relative;
+            margin: 20px 0;
+        }
         #result {
             font-size: 24px;
             font-weight: bold;
             text-align: center;
-            padding: 20px;
-            margin: 20px 0;
+            padding: 20px 50px 20px 20px;
             background-color: #f8f9fa;
             border-radius: 4px;
             min-height: 60px;
@@ -40,6 +43,34 @@
             align-items: center;
             justify-content: center;
             color: #2c3e50;
+        }
+        .copy-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            width: auto;
+            display: none;
+        }
+        .copy-btn:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        .copy-btn.show {
+            display: block;
+        }
+        .copy-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: #666;
+        }
+        .copy-btn.copied svg {
+            fill: #28a745;
         }
         button {
             display: block;
@@ -75,7 +106,14 @@
         <h1>Passphrase Generator</h1>
         <p class="description">Generate memorable passphrase components using random four-letter words</p>
 
-        <div id="result">Click the button to generate</div>
+        <div class="result-container">
+            <div id="result">Click the button to generate</div>
+            <button class="copy-btn" id="copyBtn" onclick="copyToClipboard()" title="Copy to clipboard">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                </svg>
+            </button>
+        </div>
 
         <button onclick="generatePassphrase()">Generate Passphrase</button>
 

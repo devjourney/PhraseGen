@@ -48,6 +48,37 @@ function generatePassphrase() {
     const verb = capitalize(randomChoice(verbs));
 
     document.getElementById('result').textContent = `${adjective} ${noun} ${verb}`;
+
+    // Show the copy button
+    document.getElementById('copyBtn').classList.add('show');
+}
+
+// Copy passphrase to clipboard
+async function copyToClipboard() {
+    const resultText = document.getElementById('result').textContent;
+
+    // Don't copy if no passphrase has been generated
+    if (resultText === 'Click the button to generate' || resultText === 'Loading word lists...') {
+        return;
+    }
+
+    try {
+        await navigator.clipboard.writeText(resultText);
+
+        // Visual feedback
+        const copyBtn = document.getElementById('copyBtn');
+        copyBtn.classList.add('copied');
+        copyBtn.title = 'Copied!';
+
+        // Reset after 2 seconds
+        setTimeout(() => {
+            copyBtn.classList.remove('copied');
+            copyBtn.title = 'Copy to clipboard';
+        }, 2000);
+    } catch (error) {
+        console.error('Failed to copy:', error);
+        alert('Failed to copy to clipboard');
+    }
 }
 
 // Load word lists when page loads
