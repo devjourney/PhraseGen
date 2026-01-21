@@ -5,27 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Passphrase Generator</title>
     <style>
+        :root {
+            --bg-color: #f5f5f5;
+            --container-bg: white;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --result-bg: #f8f9fa;
+            --result-text: #2c3e50;
+            --button-bg: #007bff;
+            --button-hover: #0056b3;
+            --info-bg: #e7f3ff;
+            --info-border: #007bff;
+            --link-color: #007bff;
+            --shadow: rgba(0,0,0,0.1);
+            --copy-btn-hover: rgba(0, 0, 0, 0.05);
+            --copy-btn-icon: #666;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #1a1a1a;
+                --container-bg: #2d2d2d;
+                --text-primary: #e0e0e0;
+                --text-secondary: #b0b0b0;
+                --result-bg: #3a3a3a;
+                --result-text: #e0e0e0;
+                --button-bg: #0d6efd;
+                --button-hover: #0a58ca;
+                --info-bg: #1e3a5f;
+                --info-border: #0d6efd;
+                --link-color: #4dabf7;
+                --shadow: rgba(0,0,0,0.3);
+                --copy-btn-hover: rgba(255, 255, 255, 0.1);
+                --copy-btn-icon: #b0b0b0;
+            }
+        }
+
+        body.light-theme {
+            --bg-color: #f5f5f5;
+            --container-bg: white;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --result-bg: #f8f9fa;
+            --result-text: #2c3e50;
+            --button-bg: #007bff;
+            --button-hover: #0056b3;
+            --info-bg: #e7f3ff;
+            --info-border: #007bff;
+            --link-color: #007bff;
+            --shadow: rgba(0,0,0,0.1);
+            --copy-btn-hover: rgba(0, 0, 0, 0.05);
+            --copy-btn-icon: #666;
+        }
+
+        body.dark-theme {
+            --bg-color: #1a1a1a;
+            --container-bg: #2d2d2d;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --result-bg: #3a3a3a;
+            --result-text: #e0e0e0;
+            --button-bg: #0d6efd;
+            --button-hover: #0a58ca;
+            --info-bg: #1e3a5f;
+            --info-border: #0d6efd;
+            --link-color: #4dabf7;
+            --shadow: rgba(0,0,0,0.3);
+            --copy-btn-hover: rgba(255, 255, 255, 0.1);
+            --copy-btn-icon: #b0b0b0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             max-width: 600px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #f5f5f5;
+            background-color: var(--bg-color);
+            transition: background-color 0.3s;
         }
         .container {
-            background-color: white;
+            background-color: var(--container-bg);
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px var(--shadow);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .theme-toggle {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+        .theme-toggle button {
+            width: auto;
+            padding: 8px 16px;
+            font-size: 14px;
+            background-color: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .theme-toggle button:hover {
+            background-color: var(--button-hover);
         }
         h1 {
-            color: #333;
+            color: var(--text-primary);
             text-align: center;
+            transition: color 0.3s;
         }
         .description {
-            color: #666;
+            color: var(--text-secondary);
             text-align: center;
             margin-bottom: 30px;
+            transition: color 0.3s;
         }
         .result-container {
             position: relative;
@@ -36,13 +128,14 @@
             font-weight: bold;
             text-align: center;
             padding: 20px 50px 20px 20px;
-            background-color: #f8f9fa;
+            background-color: var(--result-bg);
             border-radius: 4px;
             min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #2c3e50;
+            color: var(--result-text);
+            transition: background-color 0.3s, color 0.3s;
         }
         .copy-btn {
             position: absolute;
@@ -59,7 +152,7 @@
             display: none;
         }
         .copy-btn:hover {
-            background-color: rgba(0, 0, 0, 0.05);
+            background-color: var(--copy-btn-hover);
         }
         .copy-btn.show {
             display: block;
@@ -67,7 +160,8 @@
         .copy-btn svg {
             width: 20px;
             height: 20px;
-            fill: #666;
+            fill: var(--copy-btn-icon);
+            transition: fill 0.3s;
         }
         .copy-btn.copied svg {
             fill: #28a745;
@@ -77,7 +171,7 @@
             width: 100%;
             padding: 12px;
             font-size: 16px;
-            background-color: #007bff;
+            background-color: var(--button-bg);
             color: white;
             border: none;
             border-radius: 4px;
@@ -85,7 +179,7 @@
             transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: var(--button-hover);
         }
         button:active {
             transform: translateY(1px);
@@ -93,20 +187,22 @@
         .info {
             margin-top: 30px;
             padding: 15px;
-            background-color: #e7f3ff;
-            border-left: 4px solid #007bff;
+            background-color: var(--info-bg);
+            border-left: 4px solid var(--info-border);
             border-radius: 4px;
             font-size: 14px;
-            color: #333;
+            color: var(--text-primary);
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
         }
         .footer {
             margin-top: 20px;
             text-align: center;
         }
         .footer a {
-            color: #007bff;
+            color: var(--link-color);
             text-decoration: none;
             font-size: 14px;
+            transition: color 0.3s;
         }
         .footer a:hover {
             text-decoration: underline;
@@ -115,6 +211,9 @@
 </head>
 <body>
     <div class="container">
+        <div class="theme-toggle">
+            <button onclick="toggleTheme()" id="themeToggle">Toggle Theme</button>
+        </div>
         <h1>Passphrase Generator</h1>
         <p class="description">Generate memorable passphrase components using random four-letter words</p>
 

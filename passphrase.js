@@ -81,5 +81,39 @@ async function copyToClipboard() {
     }
 }
 
+// Theme management
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+        document.body.className = savedTheme;
+    }
+}
+
+function toggleTheme() {
+    const body = document.body;
+    const currentTheme = body.className;
+
+    if (currentTheme === 'dark-theme') {
+        body.className = 'light-theme';
+        localStorage.setItem('theme', 'light-theme');
+    } else if (currentTheme === 'light-theme') {
+        body.className = 'dark-theme';
+        localStorage.setItem('theme', 'dark-theme');
+    } else {
+        // No theme set, user is on system default
+        // Check what the system preference is and toggle to opposite
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (prefersDark) {
+            body.className = 'light-theme';
+            localStorage.setItem('theme', 'light-theme');
+        } else {
+            body.className = 'dark-theme';
+            localStorage.setItem('theme', 'dark-theme');
+        }
+    }
+}
+
 // Load word lists when page loads
 loadWordLists();
+// Initialize theme on page load
+initTheme();
