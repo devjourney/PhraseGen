@@ -89,24 +89,36 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px var(--shadow);
             transition: background-color 0.3s, box-shadow 0.3s;
+            position: relative;
         }
         .theme-toggle {
-            text-align: right;
-            margin-bottom: 15px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
         }
         .theme-toggle button {
-            width: auto;
-            padding: 8px 16px;
-            font-size: 14px;
-            background-color: var(--button-bg);
-            color: white;
-            border: none;
-            border-radius: 4px;
+            width: 40px;
+            height: 40px;
+            padding: 8px;
+            background-color: transparent;
+            border: 2px solid var(--text-secondary);
+            border-radius: 50%;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .theme-toggle button:hover {
-            background-color: var(--button-hover);
+            background-color: var(--result-bg);
+            border-color: var(--text-primary);
+            transform: rotate(20deg);
+        }
+        .theme-toggle button svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-primary);
+            transition: fill 0.3s;
         }
         h1 {
             color: var(--text-primary);
@@ -211,9 +223,6 @@
 </head>
 <body>
     <div class="container">
-        <div class="theme-toggle">
-            <button onclick="toggleTheme()" id="themeToggle">Toggle Theme</button>
-        </div>
         <h1>Passphrase Generator</h1>
         <p class="description">Generate memorable passphrase components using random four-letter words</p>
 
@@ -236,6 +245,17 @@
 
         <div class="footer">
             <a href="https://github.com/devjourney/PhraseGen" target="_blank" rel="noopener noreferrer">Get the Code</a>
+        </div>
+
+        <div class="theme-toggle">
+            <button onclick="toggleTheme()" id="themeToggle" title="Toggle theme">
+                <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37c-.39-.39-1.03-.39-1.41 0-.39.39-.39 1.03 0 1.41l1.06 1.06c.39.39 1.03.39 1.41 0 .39-.39.39-1.03 0-1.41l-1.06-1.06zm1.06-10.96c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36c.39-.39.39-1.03 0-1.41-.39-.39-1.03-.39-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z"/>
+                </svg>
+                <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;">
+                    <path d="M9 2c-1.05 0-2.05.16-3 .46 4.06 1.27 7 5.06 7 9.54 0 4.48-2.94 8.27-7 9.54.95.3 1.95.46 3 .46 5.52 0 10-4.48 10-10S14.52 2 9 2z"/>
+                </svg>
+            </button>
         </div>
     </div>
 

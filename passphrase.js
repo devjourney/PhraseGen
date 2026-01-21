@@ -82,11 +82,33 @@ async function copyToClipboard() {
 }
 
 // Theme management
+function updateThemeIcon() {
+    const body = document.body;
+    const currentTheme = body.className;
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+
+    // Determine if we're in dark mode
+    const isDark = currentTheme === 'dark-theme' ||
+                   (currentTheme === '' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    if (isDark) {
+        // Show sun icon (to switch to light mode)
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+    } else {
+        // Show moon icon (to switch to dark mode)
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+    }
+}
+
 function initTheme() {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         document.body.className = savedTheme;
     }
+    updateThemeIcon();
 }
 
 function toggleTheme() {
@@ -111,6 +133,8 @@ function toggleTheme() {
             localStorage.setItem('theme', 'dark-theme');
         }
     }
+
+    updateThemeIcon();
 }
 
 // Load word lists when page loads
